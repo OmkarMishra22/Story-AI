@@ -30,14 +30,8 @@ def main():
         print("Before running, make sure you created an empty repo at:")
         print("https://github.com/new (Leave 'Add a README' unchecked)\n")
         
-        user = input("GitHub Username: ").strip()
-        if not user:
-            print("Cancelled: Username cannot be empty.")
-            return
-
-        repo_name = input("Repository Name (e.g. Story-AL): ").strip()
-        if not repo_name:
-            repo_name = "Story-AL"
+        user = input("GitHub Username [Press Enter for 'OmkarMishra22']: ").strip() or "OmkarMishra22"
+        repo_name = input("Repository Name [Press Enter for 'Story-AI']: ").strip() or "Story-AI"
 
         print("\nGitHub requires a Personal Access Token (PAT) for command-line access.")
         print("Create one at: https://github.com/settings/tokens (select 'repo' scope)")
