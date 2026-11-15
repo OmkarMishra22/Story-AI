@@ -56,11 +56,12 @@ def main():
         safe_url = remote_url.split("@")[-1] if "@" in remote_url else remote_url
         print(f"\n[OK] Configured remote origin: https://{safe_url}")
 
-        print("[...] Pushing branch 'main' to GitHub...")
-        porcelain.push(repo, remote_url, refspecs=[b"refs/heads/main"])
+        print("[...] Pushing complete codebase to GitHub branch 'main'...")
+        porcelain.push(repo, remote_url, refspecs=[b"+refs/heads/main:refs/heads/main"])
         print("\n" + "=" * 70)
-        print(" [SUCCESS] Repository successfully pushed to GitHub!")
+        print(" [SUCCESS] Complete codebase successfully pushed to GitHub!")
         print(f" View your repository at: https://github.com/{safe_url.replace('.git', '')}")
+        print(" Vercel will now automatically trigger a successful build!")
         print("=" * 70)
     except Exception as e:
         print(f"\n[!] Push failed: {e}")
