@@ -258,6 +258,13 @@ class LoreStore:
                 data = json.load(f)
                 return data
         except Exception:
+            alt_path = os.path.join(os.getcwd(), "lorekeeper", "data", "canon_db.json")
+            if os.path.exists(alt_path):
+                try:
+                    with open(alt_path, "r", encoding="utf-8") as f:
+                        return json.load(f)
+                except Exception:
+                    pass
             return self.reset_to_seed()
 
     def save_data(self, data: Dict[str, Any]):

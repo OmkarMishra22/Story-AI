@@ -10,6 +10,13 @@ from ai_engine import AIEngine
 from voice_engine import VoiceEngine, VOICE_CATALOG
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+if not os.path.exists(os.path.join(BASE_DIR, "templates")):
+    alt_dir = os.path.join(os.getcwd(), "lorekeeper")
+    if os.path.exists(os.path.join(alt_dir, "templates")):
+        BASE_DIR = alt_dir
+
+TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
+STATIC_DIR = os.path.join(BASE_DIR, "static")
 DATA_DIR = os.path.join(BASE_DIR, "data")
 
 # In serverless environments like Vercel, use /tmp for mutable cache
@@ -23,7 +30,7 @@ try:
 except Exception:
     pass
 
-app = Flask(__name__, template_folder=os.path.join(BASE_DIR, "templates"), static_folder=os.path.join(BASE_DIR, "static"))
+app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 lore_store = LoreStore(data_dir=DATA_DIR)
 ai_engine = AIEngine()
 voice_engine = VoiceEngine(cache_dir=AUDIO_CACHE_DIR)
@@ -32,7 +39,7 @@ voice_engine = VoiceEngine(cache_dir=AUDIO_CACHE_DIR)
 def custom_audio_cache_serve(filename):
     if os.path.exists(os.path.join(AUDIO_CACHE_DIR, filename)):
         return send_from_directory(AUDIO_CACHE_DIR, filename)
-    default_dir = os.path.join(BASE_DIR, "static", "audio_cache")
+    default_dir = os.path.join(STATIC_DIR, "audio_cache")
     if os.path.exists(os.path.join(default_dir, filename)):
         return send_from_directory(default_dir, filename)
     abort(404)
@@ -116,7 +123,16 @@ def index():
     project = lore_store.get_project()
     stats = lore_store.get_stats()
     status = ai_engine.get_status()
-    return render_template("index.html", project=project, stats=stats, status=status)
+    try:
+        return render_template("index.html", project=project, stats=stats, status=status)
+    except Exception as e:
+        tpl_path = os.path.join(TEMPLATES_DIR, "index.html")
+        if os.path.exists(tpl_path):
+            from jinja2 import Template
+            with open(tpl_path, "r", encoding="utf-8") as f:
+                t = Template(f.read())
+            return t.render(project=project, stats=stats, status=status)
+        return f"<h2>Story AL — Template Lookup Notice</h2><p>Could not locate index.html in: {TEMPLATES_DIR}</p><pre>{e}</pre>", 500
 
 
 @app.route("/api/status", methods=["GET"])
