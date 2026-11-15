@@ -3,6 +3,8 @@ Story AL — GitHub Push Utility
 Helps you push your local repository to GitHub.
 
 Usage:
+    python push_to_github.py
+    # or:
     python push_to_github.py https://github.com/<your-username>/<your-repo-name>.git
 """
 
@@ -17,44 +19,58 @@ except ImportError:
     sys.exit(1)
 
 def main():
-    if len(sys.argv) < 2:
-        print("=" * 70)
-        print("Story AL — Push to GitHub Guide")
-        print("=" * 70)
-        print("To push this repository to GitHub:")
-        print()
-        print("Step 1. Create a new empty repository at https://github.com/new")
-        print("        (Leave 'Add a README' unchecked)")
-        print()
-        print("Step 2. Run:")
-        print("        python push_to_github.py https://github.com/<YOUR_USER>/<REPO>.git")
-        print()
-        print("Alternatively, if you have Git installed, run:")
-        print("        git remote add origin https://github.com/<YOUR_USER>/<REPO>.git")
-        print("        git branch -M main")
-        print("        git push -u origin main")
-        print("=" * 70)
-        return
-
-    remote_url = sys.argv[1].strip()
     repo = Repo(".")
+
+    if len(sys.argv) >= 2:
+        remote_url = sys.argv[1].strip()
+    else:
+        print("=" * 70)
+        print("  Story AL — Push to GitHub Helper")
+        print("=" * 70)
+        print("Before running, make sure you created an empty repo at:")
+        print("https://github.com/new (Leave 'Add a README' unchecked)\n")
+        
+        user = input("GitHub Username: ").strip()
+        if not user:
+            print("Cancelled: Username cannot be empty.")
+            return
+
+        repo_name = input("Repository Name (e.g. Story-AL): ").strip()
+        if not repo_name:
+            repo_name = "Story-AL"
+
+        print("\nGitHub requires a Personal Access Token (PAT) for command-line access.")
+        print("Create one at: https://github.com/settings/tokens (select 'repo' scope)")
+        token = input("Personal Access Token (PAT) [Leave blank if using SSH or credential manager]: ").strip()
+
+        if token:
+            remote_url = f"https://{token}@github.com/{user}/{repo_name}.git"
+        else:
+            remote_url = f"https://github.com/{user}/{repo_name}.git"
 
     try:
         # Add or update origin
         config = repo.get_config()
         config.set(("remote", "origin"), "url", remote_url.encode("utf-8"))
         config.write_to_path()
-        print(f"[OK] Configured remote origin: {remote_url}")
+        safe_url = remote_url.split("@")[-1] if "@" in remote_url else remote_url
+        print(f"\n[OK] Configured remote origin: https://{safe_url}")
 
         print("[...] Pushing branch 'main' to GitHub...")
         porcelain.push(repo, remote_url, refspecs=[b"refs/heads/main"])
-        print("[SUCCESS] Repository successfully pushed to GitHub!")
-        print(f"View your repository at: {remote_url.replace('.git', '')}")
+        print("\n" + "=" * 70)
+        print(" [SUCCESS] Repository successfully pushed to GitHub!")
+        print(f" View your repository at: https://github.com/{safe_url.replace('.git', '')}")
+        print("=" * 70)
     except Exception as e:
-        print(f"[!] Push error: {e}")
-        print("\nNote: GitHub requires a Personal Access Token (PAT) for HTTPS authentication.")
-        print("Format: https://<TOKEN>@github.com/<YOUR_USER>/<REPO>.git")
-        print("Or use GitHub Desktop: File -> Add Local Repository -> Select this folder -> Publish Repository.")
+        print(f"\n[!] Push failed: {e}")
+        print("\nTips:")
+        print("1. If using HTTPS, ensure your GitHub Personal Access Token has 'repo' permissions.")
+        print("2. You can also use GitHub Desktop:")
+        print("   Download at https://desktop.github.com -> File -> Add Local Repository -> Publish Repository.")
+        print("3. Or install Git for Windows at https://git-scm.com/download/win and run:")
+        print("   git remote add origin https://github.com/<USERNAME>/<REPO>.git")
+        print("   git push -u origin main")
 
 if __name__ == "__main__":
     main()
