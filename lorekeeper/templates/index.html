@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-[#151311]">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Story AL — Narrative World Engine & Cinematic Voice Studio</title>
+
+  <!-- Google Fonts: Lora (Literary Serif) + Plus Jakarta Sans (Warm Human Sans) + Courier Prime -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            story: ['"Lora"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            typewriter: ['"Courier Prime"', 'monospace']
+          },
+          colors: {
+            clay: {
+              400: '#e07a5f',
+              500: '#d96b43',
+              600: '#b85430',
+              900: '#3d1c11'
+            },
+            honey: {
+              400: '#f2cc8f',
+              500: '#e5a953',
+              600: '#c68a35',
+              900: '#3a2710'
+            },
+            moss: {
+              400: '#81b29a',
+              500: '#589977',
+              600: '#3d7358',
+              900: '#14291f'
+            },
+            wood: {
+              50: '#f7f5f2',
+              100: '#ede8e1',
+              200: '#dcd3c5',
+              700: '#3a332c',
+              800: '#2a241f',
+              900: '#1e1a16',
+              950: '#151311'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Theme Styles -->
+  <link rel="stylesheet" href="/static/styles.css?v=2.8">
+</head>
+
+<body class="h-full bg-[#151311] text-[#f6f2ec] flex flex-col md:flex-row antialiased selection:bg-[#d96b43] selection:text-white">
+
+  <!-- ===================================================================== -->
+  <!-- SIDEBAR NAVIGATION (A Writer's Atelier)                               -->
+  <!-- ===================================================================== -->
+  <aside class="w-full md:w-64 lg:w-72 bg-[#1c1916] border-b md:border-b-0 md:border-r border-[#342e28] flex flex-col justify-between flex-shrink-0 z-20 shadow-xl">
+    <div>
+      <!-- Brand & Project Header -->
+      <div class="p-5 border-b border-[#342e28]">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#d96b43] to-[#8c4224] flex items-center justify-center text-white shadow-md shadow-[#d96b43]/20">
+            <!-- Open Book Icon -->
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          </div>
+          <div>
+            <h1 class="font-story font-bold text-lg text-[#fbf9f5] tracking-wide leading-tight">Story AL</h1>
+            <p class="text-[11px] text-[#a4998c]">The Memory of Fictional Worlds</p>
+          </div>
+        </div>
+
+        <!-- Active Project Card -->
+        <div class="mt-4 p-3 rounded-xl bg-[#25211c] border border-[#3e362e]">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-medium uppercase tracking-wider text-[#e5a953]">Current Story World</span>
+            <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#352d23] text-[#e5a953] border border-[#524434]">Sample Story</span>
+          </div>
+          <p class="text-xs font-semibold text-[#f5ede0] mt-1 truncate" title="{{ project.title }}">{{ project.title }}</p>
+          <p class="text-[11px] text-[#9b8f80] mt-0.5">{{ project.genre }}</p>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="p-3 space-y-1.5 text-sm">
+        <a href="#overview" data-view="overview" class="nav-link flex items-center px-3.5 py-2.5 rounded-xl font-medium transition border">
+          <svg class="w-4 h-4 mr-3 text-[#d96b43]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          Writing Desk
+        </a>
+
+        <a href="#story-bible" data-view="story-bible" class="nav-link flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium transition border">
+          <div class="flex items-center">
+            <svg class="w-4 h-4 mr-3 text-[#f3c9d7]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            Story Bible
+          </div>
+          <span id="overview-stat-total" class="text-xs px-2 py-0.5 rounded-full bg-[#2a241f] text-[#c9c1b5]">{{ stats.total }}</span>
+        </a>
+
+        <a href="#ask-lorekeeper" data-view="ask-lorekeeper" class="nav-link flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium transition border">
+          <div class="flex items-center">
+            <svg class="w-4 h-4 mr-3 text-[#81b29a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+            Ask Your Canon
+          </div>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#1c2921] text-[#aae0c3] border border-[#2b4434]">No Guesses</span>
+        </a>
+
+        <a href="#continuity-check" data-view="continuity-check" class="nav-link flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium transition border">
+          <div class="flex items-center">
+            <svg class="w-4 h-4 mr-3 text-[#e07a5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            Check Draft Conflicts
+          </div>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#351c19] text-[#fca5a5] border border-[#522924]">Review</span>
+        </a>
+
+        <!-- Feature 5: Next Scene Suggestions -->
+        <a href="#next-scene" data-view="next-scene" class="nav-link flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium transition border">
+          <div class="flex items-center">
+            <!-- Sparkles / Compass Icon -->
+            <svg class="w-4 h-4 mr-3 text-[#e5a953]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Scene Ideas
+          </div>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#362a1c] text-[#fed99b] border border-[#594228]">3 Paths</span>
+        </a>
+
+        <!-- Feature 6: Audio Studio -->
+        <a href="#audio-studio" data-view="audio-studio" class="nav-link flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium transition border">
+          <div class="flex items-center">
+            <!-- Speaker Wave Icon -->
+            <svg class="w-4 h-4 mr-3 text-[#d96b43]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+            Voice Studio
+          </div>
+          <span class="text-[10px] px-1.5 py-0.5 rounded bg-[#38231a] text-[#fdba74] border border-[#5a3627]">Read Aloud</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Sidebar Bottom Status & Settings -->
+    <div class="p-4 border-t border-[#342e28] bg-[#171412]">
+      <div id="ai-status-badge" class="mb-3">
+        <!-- Rendered dynamically -->
+      </div>
+      <div class="flex items-center justify-between">
+        <button onclick="openSettingsModal()" class="text-xs text-[#a4998c] hover:text-[#f6f2ec] transition flex items-center">
+          <svg class="w-3.5 h-3.5 mr-1.5 text-[#e5a953]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+          Settings
+        </button>
+        <button onclick="resetSeededCanon()" class="text-[11px] text-[#8c8275] hover:text-[#e5a953] transition" title="Restore default sample canon data">
+          Reset Sample Lore
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===================================================================== -->
+  <!-- MAIN WORKSPACE CONTAINER                                              -->
+  <!-- ===================================================================== -->
+  <main class="flex-1 flex flex-col min-h-0 overflow-y-auto">
+
+    <!-- Top Bar -->
+    <header class="h-14 border-b border-[#342e28] px-6 flex items-center justify-between bg-[#181512]/90 backdrop-blur sticky top-0 z-10">
+      <div class="flex items-center space-x-2 text-xs text-[#a4998c]">
+        <span class="font-medium text-[#ede8e1]">The Aethermoor Chronicles</span>
+        <span>/</span>
+        <span class="text-[#e5a953] font-story italic">The Shattered Citadel</span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <button onclick="openAddEntryModal()" class="inline-flex items-center text-xs px-3.5 py-1.5 bg-[#d96b43] hover:bg-[#c45a33] text-white rounded-lg font-medium transition shadow-sm">
+          <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+          Add Lore Entry
+        </button>
+      </div>
+    </header>
+
+    <!-- VIEWS CONTAINER -->
+    <div class="p-6 max-w-6xl w-full mx-auto flex-1">
+
+      <!-- ================================================================= -->
+      <!-- VIEW 1: WRITING DESK (OVERVIEW)                                   -->
+      <!-- ================================================================= -->
+      <section id="view-overview" class="view-section space-y-8">
+        
+        <!-- Hero Atelier Banner -->
+        <div class="relative overflow-hidden rounded-2xl p-8 bg-gradient-to-br from-[#231e1a] via-[#1d1916] to-[#251e18] border border-[#443a30] shadow-lg">
+          <div class="relative z-10 max-w-3xl">
+            <span class="inline-flex items-center text-xs font-medium px-2.5 py-1 rounded-full bg-[#352a1e] text-[#e5a953] border border-[#5a452c] mb-3">
+              Your Creative Writing Studio
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-story font-bold text-[#faf8f5] tracking-wide leading-snug">
+              Story AL — Narrative World Engine
+            </h2>
+            <p class="mt-3 text-base text-[#c9c1b5] font-story text-lg leading-relaxed">
+              {{ project.tagline }}
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3 text-sm">
+              <button onclick="switchView('story-bible')" class="px-4 py-2 bg-[#d96b43] hover:bg-[#c45a33] text-white rounded-xl font-medium transition shadow">
+                Open Story Bible
+              </button>
+              <button onclick="switchView('ask-lorekeeper')" class="px-4 py-2 bg-[#2a241f] hover:bg-[#342d27] text-[#ede8e1] rounded-xl font-medium transition border border-[#443a30]">
+                Ask Your Canon
+              </button>
+              <button onclick="switchView('continuity-check')" class="px-4 py-2 bg-[#2a241f] hover:bg-[#342d27] text-[#ede8e1] rounded-xl font-medium transition border border-[#443a30]">
+                Check a Draft
+              </button>
+              <button onclick="switchView('next-scene')" class="px-4 py-2 bg-[#2a241f] hover:bg-[#342d27] text-[#e5a953] rounded-xl font-medium transition border border-[#524434]">
+                Explore Scene Ideas
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Stats Counter -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-[#a4998c]">Your Canon at a Glance</h3>
+            <span class="text-xs text-[#8c8275]">Click any card to explore</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3.5">
+            
+            <div onclick="switchView('story-bible'); filterBibleCategory('character');" class="paper-card p-4 cursor-pointer">
+              <div class="flex items-center justify-between text-[#f3c9d7] mb-1">
+                <span class="text-xs font-medium">Characters</span>
+                <span class="w-2 h-2 rounded-full bg-[#b8738a]"></span>
+              </div>
+              <div id="overview-stat-chars" class="text-2xl font-story font-bold text-[#fbf9f5]">{{ stats.characters }}</div>
+              <p class="text-[11px] text-[#a4998c] mt-1">Goals & relationships</p>
+            </div>
+
+            <div onclick="switchView('story-bible'); filterBibleCategory('place');" class="paper-card p-4 cursor-pointer">
+              <div class="flex items-center justify-between text-[#aae0c3] mb-1">
+                <span class="text-xs font-medium">Locations</span>
+                <span class="w-2 h-2 rounded-full bg-[#589977]"></span>
+              </div>
+              <div id="overview-stat-places" class="text-2xl font-story font-bold text-[#fbf9f5]">{{ stats.places }}</div>
+              <p class="text-[11px] text-[#a4998c] mt-1">Hazards & atmosphere</p>
+            </div>
+
+            <div onclick="switchView('story-bible'); filterBibleCategory('event');" class="paper-card p-4 cursor-pointer">
+              <div class="flex items-center justify-between text-[#fed99b] mb-1">
+                <span class="text-xs font-medium">Events</span>
+                <span class="w-2 h-2 rounded-full bg-[#e5a953]"></span>
+              </div>
+              <div id="overview-stat-events" class="text-2xl font-story font-bold text-[#fbf9f5]">{{ stats.events }}</div>
+              <p class="text-[11px] text-[#a4998c] mt-1">Cataclysms & treaties</p>
+            </div>
+
+            <div onclick="switchView('story-bible'); filterBibleCategory('rule');" class="paper-card p-4 cursor-pointer">
+              <div class="flex items-center justify-between text-[#fca5a5] mb-1">
+                <span class="text-xs font-medium">World Rules</span>
+                <span class="w-2 h-2 rounded-full bg-[#c94a4a]"></span>
+              </div>
+              <div id="overview-stat-rules" class="text-2xl font-story font-bold text-[#fbf9f5]">{{ stats.rules }}</div>
+              <p class="text-[11px] text-[#a4998c] mt-1">Physical & magical laws</p>
+            </div>
+
+            <div onclick="switchView('next-scene');" class="paper-card p-4 cursor-pointer">
+              <div class="flex items-center justify-between text-[#fde68a] mb-1">
+                <span class="text-xs font-medium">Saved Ideas</span>
+                <span class="w-2 h-2 rounded-full bg-[#e5a953]"></span>
+              </div>
+              <div id="overview-stat-notes" class="text-2xl font-story font-bold text-[#fbf9f5]">{{ stats.notes or 2 }}</div>
+              <p class="text-[11px] text-[#a4998c] mt-1">Draft notes & scenes</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 4 Steps of Story AL -->
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-[#a4998c] mb-3">What You Can Do Here</h3>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+            <div class="paper-panel p-4">
+              <div class="w-7 h-7 rounded-lg bg-[#3b2532] text-[#f3c9d7] flex items-center justify-center font-bold text-xs mb-2">1</div>
+              <h4 class="text-sm font-semibold text-[#f5ede0] mb-1">Build Your Story Bible</h4>
+              <p class="text-xs text-[#a4998c] leading-relaxed">
+                Record your characters' desires, dangerous ruins, historical milestones, and binding rules.
+              </p>
+            </div>
+
+            <div class="paper-panel p-4">
+              <div class="w-7 h-7 rounded-lg bg-[#1e2f24] text-[#aae0c3] flex items-center justify-center font-bold text-xs mb-2">2</div>
+              <h4 class="text-sm font-semibold text-[#f5ede0] mb-1">Ask Your Canon</h4>
+              <p class="text-xs text-[#a4998c] leading-relaxed">
+                Check established facts anytime. If a question isn't in your notes, Story AL will tell you rather than making up answers.
+              </p>
+            </div>
+
+            <div class="paper-panel p-4">
+              <div class="w-7 h-7 rounded-lg bg-[#381c1c] text-[#fca5a5] flex items-center justify-center font-bold text-xs mb-2">3</div>
+              <h4 class="text-sm font-semibold text-[#f5ede0] mb-1">Check Draft Conflicts</h4>
+              <p class="text-xs text-[#a4998c] leading-relaxed">
+                Paste a scene draft to catch accidental violations of magic laws or character history before readers see them.
+              </p>
+            </div>
+
+            <div class="paper-panel p-4">
+              <div class="w-7 h-7 rounded-lg bg-[#38231a] text-[#fdba74] flex items-center justify-center font-bold text-xs mb-2">4</div>
+              <h4 class="text-sm font-semibold text-[#f5ede0] mb-1">Ideas & Voice Studio</h4>
+              <p class="text-xs text-[#a4998c] leading-relaxed">
+                Brainstorm 3 scene directions grounded in character goals, or listen to your dialogue read aloud in distinct voices.
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Narrative Premise Card -->
+        <div class="paper-panel p-6">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-bold text-[#f5ede0]">Sample Setting Overview</h3>
+            <span class="text-xs text-[#8c8275] font-story italic">{{ project.created_at }}</span>
+          </div>
+          <p class="text-sm text-[#d8d0c5] leading-relaxed font-story text-base">
+            "Three decades after the Grand Conduit shattered the continental shelf, Old Oakhaven lies submerged beneath the tides. High above, the Ivory Spire hoards forbidden celestial research under the guise of civic peace, while down in the mist-choked canals of the Low Docks, smugglers and exiled cartographers race against time to recover ancient sunstones before the Eclipse of the Seven Moons."
+          </p>
+        </div>
+
+        <!-- Featured Canon Records -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-[#a4998c]">Featured Canon Highlights</h3>
+            <button onclick="switchView('story-bible')" class="text-xs text-[#d96b43] hover:text-[#e07a5f] font-medium">Browse All Entries &rarr;</button>
+          </div>
+          <div id="overview-recent-entries" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- VIEW 2: STORY BIBLE                                               -->
+      <!-- ================================================================= -->
+      <section id="view-story-bible" class="view-section hidden space-y-6">
+        
+        <!-- Controls Bar -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 paper-panel p-4">
+          
+          <!-- Category Filter Pills -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <button data-category="all" class="bible-cat-tab text-xs px-3.5 py-1.5 rounded-xl bg-[#d96b43] text-white font-medium transition">All Entries</button>
+            <button data-category="character" class="bible-cat-tab text-xs px-3.5 py-1.5 rounded-xl bg-[#2a241f] text-[#c9c1b5] hover:text-white font-medium transition">Characters</button>
+            <button data-category="place" class="bible-cat-tab text-xs px-3.5 py-1.5 rounded-xl bg-[#2a241f] text-[#c9c1b5] hover:text-white font-medium transition">Places</button>
+            <button data-category="event" class="bible-cat-tab text-xs px-3.5 py-1.5 rounded-xl bg-[#2a241f] text-[#c9c1b5] hover:text-white font-medium transition">Events</button>
+            <button data-category="rule" class="bible-cat-tab text-xs px-3.5 py-1.5 rounded-xl bg-[#2a241f] text-[#c9c1b5] hover:text-white font-medium transition">World Rules</button>
+          </div>
+
+          <!-- Search & Add Actions -->
+          <div class="flex items-center space-x-3">
+            <div class="relative w-full sm:w-64">
+              <input id="bible-search-input" type="text" placeholder="Search by name, tag, or lore..." class="w-full text-xs bg-[#241f1a] border border-[#3e362e] rounded-xl pl-8 pr-3 py-2 text-[#ede8e1] placeholder-[#8c8275] focus:outline-none focus:border-[#d96b43] transition">
+              <svg class="w-3.5 h-3.5 text-[#8c8275] absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+            <button onclick="openAddEntryModal()" class="flex-shrink-0 text-xs px-3.5 py-2 bg-[#d96b43] hover:bg-[#c45a33] text-white rounded-xl font-medium transition flex items-center">
+              <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+              Add Entry
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Status & Count Bar -->
+        <div class="flex items-center justify-between text-xs text-[#a4998c] px-1">
+          <span id="story-bible-count-badge">Loading entries...</span>
+          <span class="text-[#8c8275]">Click pen to edit or trash to delete. Changes persist in your local project database.</span>
+        </div>
+
+        <!-- Entries Grid -->
+        <div id="story-bible-entries" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Populated dynamically -->
+        </div>
+
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- VIEW 3: ASK YOUR CANON (GROUNDED Q&A)                             -->
+      <!-- ================================================================= -->
+      <section id="view-ask-lorekeeper" class="view-section hidden space-y-5">
+        
+        <!-- Header Banner -->
+        <div class="paper-panel p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h2 class="text-lg font-story font-bold text-[#faf8f5] flex items-center">
+                <svg class="w-5 h-5 mr-2 text-[#81b29a]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                Ask Your Canon
+              </h2>
+              <p class="text-xs text-[#a4998c] mt-1">
+                Story AL answers exclusively from your saved Story Bible. If you haven't written a detail into canon yet, it will tell you clearly instead of inventing facts.
+              </p>
+            </div>
+            <button onclick="clearChatHistory()" class="self-start sm:self-auto text-xs text-[#a4998c] hover:text-[#f6f2ec] px-3 py-1.5 rounded-lg bg-[#25201b] border border-[#3a3229] transition flex items-center">
+              Clear Conversation
+            </button>
+          </div>
+
+          <!-- Suggested Query Chips -->
+          <div class="mt-4 pt-3 border-t border-[#342e28]">
+            <span class="text-[11px] text-[#a4998c] font-semibold uppercase tracking-wider block mb-2">Try one of these sample questions:</span>
+            <div id="chat-sample-questions" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Stream Window -->
+        <div class="paper-panel rounded-2xl flex flex-col h-[520px] overflow-hidden shadow-inner">
+          <div id="chat-messages" class="flex-1 p-5 overflow-y-auto space-y-4">
+            <!-- Messages rendered dynamically -->
+          </div>
+
+          <!-- Chat Input Bar -->
+          <div class="p-4 bg-[#1a1714] border-t border-[#342e28] flex items-center space-x-3">
+            <div class="relative flex-1">
+              <input id="chat-input" type="text" placeholder="Ask a question about your characters, places, world rules, or history..." class="w-full text-sm bg-[#231e1a] border border-[#3e362e] rounded-xl px-4 py-3 text-[#f6f2ec] placeholder-[#8c8275] focus:outline-none focus:border-[#d96b43] transition pr-10">
+            </div>
+            <button onclick="handleChatSubmit()" class="px-5 py-3 bg-[#d96b43] hover:bg-[#c45a33] text-white rounded-xl text-sm font-semibold transition flex items-center shadow-md shadow-[#d96b43]/20">
+              <span>Ask</span>
+              <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- VIEW 4: CHECK DRAFT FOR CONFLICTS                                 -->
+      <!-- ================================================================= -->
+      <section id="view-continuity-check" class="view-section hidden space-y-6">
+        
+        <!-- Header Banner -->
+        <div class="paper-panel p-5">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-lg font-story font-bold text-[#faf8f5] flex items-center">
+                <svg class="w-5 h-5 mr-2 text-[#e07a5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                Check Draft for Story Conflicts
+              </h2>
+              <p class="text-xs text-[#a4998c] mt-1">
+                Paste a scene or paragraph below. Story AL checks it against your Story Bible to flag possible contradictions as friendly suggestions for your review.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sample Draft Buttons -->
+          <div class="mt-4 pt-3 border-t border-[#342e28]">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="text-[11px] text-[#a4998c] font-semibold uppercase tracking-wider">Load Sample Scenes to Test:</span>
+              <button onclick="clearDraftText()" class="text-xs text-[#8c8275] hover:text-[#d8d0c5]">Clear Input</button>
+            </div>
+            <div id="sample-draft-buttons" class="mt-2 flex flex-wrap gap-2">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Draft Input Area -->
+        <div class="paper-panel p-5 space-y-3">
+          <div class="flex items-center justify-between text-xs text-[#a4998c]">
+            <span class="font-medium text-[#ede8e1]">Your Draft Scene</span>
+            <span id="draft-word-count" class="font-story italic text-[#8c8275]">0 words · 0 characters</span>
+          </div>
+
+          <textarea id="continuity-draft-input" rows="7" placeholder="Paste your draft scene or chapter here, or click one of the sample scenes above..." class="w-full bg-[#231e1a] border border-[#3e362e] rounded-xl p-4 text-sm text-[#f6f2ec] placeholder-[#8c8275] focus:outline-none focus:border-[#d96b43] transition font-story text-base leading-relaxed"></textarea>
+
+          <div class="flex items-center justify-between pt-2">
+            <p class="text-xs text-[#8c8275]">
+              Results are treated as suggestions for the author, not definitive errors.
+            </p>
+            <button id="btn-run-continuity" onclick="runContinuityCheck()" class="px-5 py-2.5 bg-[#d96b43] hover:bg-[#c45a33] text-white rounded-xl text-sm font-semibold transition flex items-center shadow-md shadow-[#d96b43]/20">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              Check Draft
+            </button>
+          </div>
+        </div>
+
+        <!-- Continuity Results Container -->
+        <div id="continuity-results" class="hidden">
+          <!-- Populated dynamically -->
+        </div>
+
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- VIEW 5: SCENE IDEAS (NEXT-SCENE SUGGESTIONS)                      -->
+      <!-- ================================================================= -->
+      <section id="next-scene" class="view-section hidden space-y-6">
+        
+        <!-- Header Banner -->
+        <div class="paper-panel p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <h2 class="text-lg font-story font-bold text-[#faf8f5] flex items-center">
+                <svg class="w-5 h-5 mr-2 text-[#e5a953]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                Explore What Could Happen Next
+              </h2>
+              <p class="text-xs text-[#a4998c] mt-1">
+                Stuck on your next chapter? Pick a character or describe your current situation to generate three distinct directions grounded in character goals and established rules.
+              </p>
+            </div>
+            <span class="self-start sm:self-auto text-xs px-2.5 py-1 rounded-full bg-[#352a1e] text-[#fed99b] border border-[#594228] font-story italic">
+              Optional ideas · Not added to canon
+            </span>
+          </div>
+
+          <!-- Input Controls Form -->
+          <div class="mt-4 pt-4 border-t border-[#342e28] grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-[#c9c1b5] uppercase mb-1">Select Lead Character</label>
+              <select id="next-scene-char-select" class="w-full text-xs bg-[#231e1a] border border-[#3e362e] rounded-xl px-3 py-2.5 text-[#f6f2ec] focus:outline-none focus:border-[#d96b43]">
+                <option value="Lyra Vance">Lyra Vance (Exiled Cartographer)</option>
+                <option value="Captain Kaelen">Captain Kaelen (Sky-Skiff Smuggler)</option>
+                <option value="Master Corvus">Master Corvus (Spire High Curator)</option>
+                <option value="General Ensemble">Ensemble / Any Character</option>
+              </select>
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-semibold text-[#c9c1b5] uppercase mb-1">Current Story Situation</label>
+              <div class="flex gap-2">
+                <input id="next-scene-situation-input" type="text" placeholder="e.g. Escaping the canal watch near the Low Docks with a cracked astrolabe..." value="Docking at the Low Docks after escaping the canal watch with an unregistered resonance compass" class="flex-1 text-xs bg-[#231e1a] border border-[#3e362e] rounded-xl px-3 py-2.5 text-[#f6f2ec] placeholder-[#8c8275] focus:outline-none focus:border-[#d96b43]">
+                <button onclick="generateNextScenes()" id="btn-generate-scenes" class="flex-shrink-0 px-4 py-2 bg-[#d96b43] hover:bg-[#c45a33] text-white rounded-xl text-xs font-semibold transition flex items-center shadow-sm">
+                  <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                  Generate 3 Ideas
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Generated Suggestions Grid -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-[#a4998c]">Three Possible Story Directions</h3>
+            <span class="text-xs text-[#8c8275]">Save any idea as a draft note without changing your Story Bible</span>
+          </div>
+          <div id="next-scene-cards" class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Writer's Saved Notebook (Draft Notes) -->
+        <div class="paper-panel p-5 mt-8">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-2">
+              <svg class="w-4 h-4 text-[#e5a953]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+              <h3 class="text-sm font-bold text-[#faf8f5]">Your Draft Notes & Saved Scene Ideas</h3>
+            </div>
+            <span id="saved-notes-count-badge" class="text-xs text-[#a4998c] font-story italic">Loading notes...</span>
+          </div>
+          <div id="saved-notes-container" class="space-y-3">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- VIEW 6: CINEMATIC VOICE STUDIO                                    -->
+      <!-- ================================================================= -->
+      <section id="audio-studio" class="view-section hidden space-y-6">
+        
+        <!-- Simple & Elegant Header Banner -->
+        <div class="paper-panel p-5 border border-[#332b24] bg-[#1a1613] rounded-2xl shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center space-x-2.5 mb-1.5">
+                <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-[#271f19] text-[#e5a953] border border-[#3f3125] font-semibold tracking-wider uppercase">
+                  Voice Studio
+                </span>
+                <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-[#1b251e] text-[#aae0c3] border border-[#2b3a30] font-medium flex items-center">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#4ade80] mr-1.5"></span>
+                  Audio Engine Ready
+                </span>
+              </div>
+              <h2 class="text-xl font-story font-bold text-[#faf8f5] tracking-wide">
+                Cinematic Audio Studio
+              </h2>
+              <p class="text-xs text-[#a4998c] mt-1 max-w-2xl leading-relaxed">
+                Experience fiction brought to life with expressive character voices, dynamic emotional prosody, and real-time playback.
+              </p>
+            </div>
+            <div id="audio-engine-badge" class="flex-shrink-0">
+              <!-- Engine status badge populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Voice Casting Table -->
+        <div class="paper-panel p-5 border border-[#332b24] bg-[#1a1613] rounded-2xl shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[#2d2620] gap-2 mb-4">
+            <div>
+              <div class="flex items-center space-x-2">
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#271d18] text-[#e5a953] border border-[#3e2e21] font-semibold uppercase">Cast Roster</span>
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-[#ede8e1]">Scene Voice Casting</h3>
+              </div>
+              <p class="text-xs text-[#8c8275] mt-0.5">Assign a voice and customize emotional delivery notes for each persona</p>
+            </div>
+            <span class="text-xs text-[#e5a953] italic font-medium flex items-center">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#e5a953] mr-1.5"></span>
+              Live Emotion Prosody Active
+            </span>
+          </div>
+          <div id="audio-casting-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Populated dynamically with character voices -->
+          </div>
+        </div>
+
+        <!-- Master Mixing Console & Scene Audio Player -->
+        <div class="paper-panel p-5 space-y-4 border border-[#443528] bg-[#1e1916] shadow-xl relative">
+          
+          <!-- Autoplay Unlock Prompt (Displays seamlessly if browser blocks audio) -->
+          <div id="audio-autoplay-prompt" class="hidden p-3 rounded-xl bg-[#3d1a20] border border-[#8c2b38] flex items-center justify-between text-xs text-[#fecaca] animate-bounce">
+            <div class="flex items-center space-x-2">
+              <svg class="w-4 h-4 text-[#f87171]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+              <span>Browser audio locked by autoplay policy. Click button to enable studio sound.</span>
+            </div>
+            <button onclick="unlockAutoplayNow()" class="px-3 py-1 bg-[#ef4444] hover:bg-[#dc2626] text-white font-bold rounded-lg transition shadow-md">
+              Enable Audio Now
+            </button>
+          </div>
+
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between pb-3 border-b border-[#342e28] gap-4">
+            <div>
+              <div class="flex items-center space-x-2.5">
+                <span class="text-xs px-2 py-0.5 rounded-md bg-[#2b1f1a] text-[#e5a953] border border-[#453123] font-bold">SCENE 1</span>
+                <h3 id="audio-scene-title" class="text-base font-story font-bold text-[#faf8f5]">The Hearth at Whisper Cove</h3>
+                <span id="audio-now-playing-badge" class="hidden text-[10px] px-2.5 py-0.5 rounded-full bg-[#1b2820] text-[#aae0c3] border border-[#2b4434] font-semibold animate-pulse flex items-center">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#4ade80] mr-1.5 animate-ping"></span>
+                  Playing Full Scene
+                </span>
+              </div>
+              <p id="audio-scene-location" class="text-xs text-[#e5a953] italic mt-0.5">The Fireside Snug, Old Harbor Tavern</p>
+            </div>
+
+            <!-- Master Transport Controls & Emotion Prosody Slider -->
+            <div class="flex items-center flex-wrap gap-2.5">
+              
+              <!-- Emotion & Prosody Slider Deck -->
+              <div class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#171311] border border-[#3e322b] shadow-inner">
+                <div class="flex items-center space-x-1.5">
+                  <span class="text-[10px] text-[#e5a953] uppercase font-semibold">Emotion:</span>
+                  <span id="emotion-level-label" class="text-[10px] font-bold text-[#faf8f5] min-w-[76px] whitespace-nowrap">🎭 Dramatic (75%)</span>
+                </div>
+
+                <!-- Continuous Emotion Range Slider -->
+                <input type="range" id="emotion-slider" min="0.25" max="1.0" step="0.05" value="0.75" oninput="setExpressiveness(parseFloat(this.value))" class="w-16 sm:w-24 accent-[#d96b43] h-1.5 bg-[#38312b] rounded-lg cursor-pointer" title="Adjust dramatic prosody and emotional intensity">
+
+                <!-- Quick Preset Pills -->
+                <div class="hidden sm:flex items-center space-x-1 border-l border-[#3a3028] pl-2">
+                  <button type="button" id="btn-express-035" onclick="setExpressiveness(0.35)" class="text-[10px] px-2 py-0.5 rounded-lg text-[#a4998c] hover:text-white transition">Calm</button>
+                  <button type="button" id="btn-express-055" onclick="setExpressiveness(0.55)" class="text-[10px] px-2 py-0.5 rounded-lg text-[#a4998c] hover:text-white transition">Subtle</button>
+                  <button type="button" id="btn-express-075" onclick="setExpressiveness(0.75)" class="text-[10px] px-2 py-0.5 rounded-lg bg-[#d96b43] text-white font-semibold transition shadow-sm">Dramatic</button>
+                  <button type="button" id="btn-express-095" onclick="setExpressiveness(0.95)" class="text-[10px] px-2 py-0.5 rounded-lg text-[#a4998c] hover:text-white transition">Intense</button>
+                </div>
+
+                <!-- Instant Audition Button -->
+                <button type="button" onclick="auditionCurrentEmotion()" title="Audition this emotion level immediately" class="text-[10px] px-2.5 py-1 rounded-lg bg-[#301c22] hover:bg-[#42222d] text-[#fca5a5] hover:text-white border border-[#5c2836] transition flex items-center shadow-sm">
+                  <svg class="w-3 h-3 mr-1 text-[#f87171]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path></svg>
+                  <span>Audition</span>
+                </button>
+              </div>
+
+              <!-- Main Transport Buttons -->
+              <button id="btn-play-scene" onclick="playAudioScene()" class="px-5 py-2.5 bg-gradient-to-r from-[#d96b43] to-[#e5a953] hover:from-[#c45a33] hover:to-[#d09641] text-white rounded-xl text-xs font-bold transition flex items-center shadow-lg shadow-[#d96b43]/30 transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>Play Full Scene</span>
+              </button>
+
+              <button id="btn-stop-scene" onclick="stopAudioScene()" class="px-3.5 py-2.5 bg-[#251f1b] hover:bg-[#342b25] text-[#c9c1b5] rounded-xl text-xs font-medium transition border border-[#443a30] flex items-center hover:text-white">
+                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z"></path></svg>
+                Stop
+              </button>
+            </div>
+          </div>
+
+          <!-- Studio Live Master Player Deck -->
+          <div id="audio-active-bar" class="p-4 rounded-xl bg-[#151210] border border-[#3b3127] flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-inner relative overflow-hidden">
+            <div class="flex items-center space-x-3.5 min-w-0">
+              <!-- Live Equalizer Bars -->
+              <div id="audio-wave-anim" class="flex items-end space-x-1 h-7 w-8 flex-shrink-0" title="Audio Waveform Master">
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+              </div>
+
+              <!-- Speaker & Teleprompter Status -->
+              <div class="truncate">
+                <div class="flex items-center space-x-2">
+                  <span id="audio-current-speaker" class="text-sm font-bold text-[#faf8f5] truncate">Ready to Play</span>
+                  <span id="audio-active-mood-tag" class="hidden text-[9px] px-2 py-0.5 rounded-full bg-[#331c24] text-[#fca5a5] border border-[#522938] font-semibold"></span>
+                </div>
+                <div id="audio-current-status-text" class="text-xs text-[#a4998c] truncate italic mt-0.5">— Click "Play Full Scene" or audition individual dialogue lines below</div>
+              </div>
+            </div>
+
+            <!-- Frequency Waveform Canvas & Interactive Scrubber -->
+            <div class="flex items-center space-x-3 self-stretch md:self-auto justify-end">
+              <!-- Smooth Live Frequency Waveform Canvas -->
+              <canvas id="audio-wave-canvas" width="140" height="28" class="hidden lg:block w-36 h-7 rounded-lg bg-[#0e0c0a] border border-[#2d251f]"></canvas>
+
+              <!-- Precision Timeline Scrubber -->
+              <div id="audio-progress-container" class="flex items-center space-x-2 flex-1 sm:w-64 max-w-xs">
+                <span id="audio-time-current" class="text-[10px] text-[#8c8275] font-mono min-w-[28px] text-right">0:00</span>
+                <div id="audio-scrubber-track" onclick="seekAudioProgress(event)" class="smooth-scrubber flex-1" title="Click anywhere to seek">
+                  <div id="audio-scrubber-fill" class="smooth-scrubber-fill"></div>
+                </div>
+                <span id="audio-time-total" class="text-[10px] text-[#8c8275] font-mono min-w-[28px]">0:00</span>
+              </div>
+
+              <!-- Studio FX Badges -->
+              <span class="hidden sm:inline-flex text-[9px] px-2 py-0.5 rounded-full bg-[#271d18] text-[#e5a953] border border-[#4a3425] font-medium items-center flex-shrink-0" title="Studio Mastering & Crossfading Active">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#e5a953] mr-1 animate-pulse"></span>
+                44.1kHz Studio FX
+              </span>
+            </div>
+            
+            <audio id="lore-audio-element" class="hidden" preload="auto"></audio>
+            <!-- Secondary Pre-buffer Element for Instant Zero-Latency Next-Line Transitions -->
+            <audio id="lore-audio-prebuffer" class="hidden" preload="auto"></audio>
+          </div>
+
+          <!-- Live Scene Telemetry & Playback Timeline Deck -->
+          <div id="audio-scene-timing-panel" class="p-3.5 rounded-xl bg-[#191512] border border-[#3f3429] space-y-2.5 shadow-md">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+              <!-- Left: Live Real-Time Clock & Current Line Badge -->
+              <div class="flex items-center space-x-2.5">
+                <div class="flex items-center px-2.5 py-1 rounded-lg bg-[#241c17] border border-[#483728] font-mono text-xs sm:text-sm text-[#fed99b] shadow-inner">
+                  <span class="w-2 h-2 rounded-full bg-[#e5a953] mr-2 animate-pulse" id="scene-clock-pulse"></span>
+                  <span id="scene-clock-elapsed" class="font-bold">0:00.0</span>
+                  <span class="text-[#786c5f] mx-1">/</span>
+                  <span id="scene-clock-total" class="text-[#a4998c]">0:00.0</span>
+                </div>
+                <div id="scene-line-progress-badge" class="px-2.5 py-1 rounded-lg bg-[#211a1e] text-[#fca5a5] border border-[#4a2632] text-[11px] font-medium flex items-center">
+                  <span id="scene-line-progress-text">Ready (5 Lines)</span>
+                </div>
+              </div>
+
+              <!-- Right: Latency & Speed & Progress % -->
+              <div class="flex items-center space-x-2 flex-wrap">
+                <!-- Live Synthesis Latency Badge -->
+                <span id="scene-latency-badge" class="text-[10px] px-2.5 py-0.5 rounded-full bg-[#1b2820] text-[#aae0c3] border border-[#2b4434] font-medium flex items-center" title="Pre-buffered audio playback latency">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#34d399] mr-1.5"></span>
+                  ⚡ Synthesis Latency: <span id="scene-latency-val" class="ml-1 font-bold">0.01s (Instant Stream)</span>
+                </span>
+
+                <!-- Overall Percentage -->
+                <span id="scene-progress-pct" class="text-[11px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#2a221d] text-[#e5a953] border border-[#443528]">0%</span>
+              </div>
+            </div>
+
+            <!-- Multi-Segmented Scene Timeline Bar (Interactive 5-line track) -->
+            <div class="space-y-1">
+              <div id="scene-segments-container" class="grid grid-cols-5 gap-1.5 h-7 w-full">
+                <!-- Segment buttons populated dynamically for each line -->
+              </div>
+              <div class="flex items-center justify-between text-[10px] text-[#786c5f] px-0.5 pt-0.5">
+                <span id="scene-teleprompter-ticker" class="truncate font-mono text-[#a4998c]">Click any segment above to jump directly to that character's line</span>
+                <span id="scene-prebuffer-status" class="text-[#34d399] font-medium flex items-center flex-shrink-0 ml-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#34d399] mr-1"></span>
+                  Pre-buffered in RAM (0ms latency transition)
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Script Dialogue Lines (Screenplay View with Live Karaoke Highlighting) -->
+          <div class="space-y-2 pt-2">
+            <div class="flex items-center justify-between text-xs text-[#8c8275] px-1">
+              <span class="uppercase tracking-wider font-semibold text-[10px]">Scene Script & Live Teleprompter</span>
+              <span class="italic text-[11px]">Click any line to perform individually</span>
+            </div>
+            <div id="audio-script-lines" class="space-y-3">
+              <!-- Populated dynamically with character crests and dialogue -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Story Voices Showcase & Preview Gallery -->
+        <div class="paper-panel p-5 space-y-4 border border-[#332b24] bg-[#1a1613] rounded-2xl shadow-sm">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#2d2620]">
+            <div>
+              <div class="flex items-center space-x-2">
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#271d18] text-[#e5a953] border border-[#3e2e21] font-semibold tracking-wider uppercase">Voice Library</span>
+                <h3 class="text-base font-story font-bold text-[#faf8f5]">Story Voices — Preview Gallery (16 Voices)</h3>
+              </div>
+              <p class="text-xs text-[#a4998c] mt-0.5">Audition character voices in the library, explore archetypes, or sequentially preview all 16 voices.</p>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              <button id="btn-preview-all-voices" onclick="playAllVoicePreviews()" class="px-4 py-2 bg-[#d96b43] hover:bg-[#c45a33] text-white rounded-xl text-xs font-semibold transition flex items-center shadow-md shadow-[#d96b43]/20">
+                <svg class="w-3.5 h-3.5 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span id="btn-preview-all-text">Preview All 16 Voices</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Category Filter Bar -->
+          <div class="flex items-center flex-wrap gap-2 text-xs">
+            <span class="text-[11px] text-[#8c8275] uppercase font-semibold mr-1">Filter:</span>
+            <button type="button" onclick="filterVoiceShowcase('all')" id="vfilter-all" class="px-2.5 py-1 rounded-lg bg-[#3d2f25] text-[#fed99b] border border-[#594228] transition font-medium">All (16)</button>
+            <button type="button" onclick="filterVoiceShowcase('male')" id="vfilter-male" class="px-2.5 py-1 rounded-lg bg-[#25201b] text-[#a4998c] hover:text-[#ede8e1] border border-[#38312b] transition font-medium">Male (9)</button>
+            <button type="button" onclick="filterVoiceShowcase('female')" id="vfilter-female" class="px-2.5 py-1 rounded-lg bg-[#25201b] text-[#a4998c] hover:text-[#ede8e1] border border-[#38312b] transition font-medium">Female (7)</button>
+            <button type="button" onclick="filterVoiceShowcase('british')" id="vfilter-british" class="px-2.5 py-1 rounded-lg bg-[#25201b] text-[#a4998c] hover:text-[#ede8e1] border border-[#38312b] transition font-medium">British</button>
+            <button type="button" onclick="filterVoiceShowcase('american')" id="vfilter-american" class="px-2.5 py-1 rounded-lg bg-[#25201b] text-[#a4998c] hover:text-[#ede8e1] border border-[#38312b] transition font-medium">American</button>
+          </div>
+
+          <!-- All 16 Voices Grid -->
+          <div id="all-voices-showcase-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            <!-- Populated dynamically with character voices -->
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL: ADD / EDIT STORY BIBLE ENTRY                                  -->
+  <!-- ===================================================================== -->
+  <div id="entry-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="paper-panel bg-[#1f1b17] border border-[#443a30] max-w-xl w-full rounded-2xl p-6 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-3 border-b border-[#342e28]">
+        <h3 id="modal-entry-title" class="text-lg font-bold text-[#faf8f5] font-story">Add Story Bible Entry</h3>
+        <button onclick="closeEntryModal()" class="text-[#8c8275] hover:text-[#f6f2ec] text-2xl leading-none">&times;</button>
+      </div>
+
+      <form id="entry-form" class="mt-4 space-y-4">
+        <input type="hidden" id="entry-id-field">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold text-[#c9c1b5] uppercase mb-1">Category</label>
+            <select id="entry-category-select" class="w-full text-xs bg-[#25201b] border border-[#3e362e] rounded-xl px-3 py-2.5 text-[#f6f2ec] focus:outline-none focus:border-[#d96b43]">
+              <option value="character">Character</option>
+              <option value="place">Location / Place</option>
+              <option value="event">Historical Event</option>
+              <option value="rule">World Rule / Physical Law</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-[#c9c1b5] uppercase mb-1">Entry Name</label>
+            <input id="entry-name-input" type="text" placeholder="e.g. Lyra Vance / Obsidian Trench" required class="w-full text-xs bg-[#25201b] border border-[#3e362e] rounded-xl px-3 py-2.5 text-[#f6f2ec] focus:outline-none focus:border-[#d96b43]">
+          </div>
+        </div>
+
+        <!-- Character Specific Fields -->
+        <div id="modal-character-fields" class="space-y-3 p-3.5 rounded-xl bg-[#2a1d25] border border-[#543044]">
+          <div>
+            <label class="block text-xs font-semibold text-[#f3c9d7] mb-1">Role / Archetype</label>
+            <input id="entry-role-input" type="text" placeholder="e.g. Exiled Aether-Cartographer" class="w-full text-xs bg-[#20151c] border border-[#4a2b3c] rounded-lg px-3 py-2 text-[#f6f2ec] focus:outline-none focus:border-[#d96b43]">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[#f3c9d7] mb-1">Character Goal</label>
+            <textarea id="entry-goal-input" rows="2" placeholder="What does this character seek to achieve or recover?" class="w-full text-xs bg-[#20151c] border border-[#4a2b3c] rounded-lg px-3 py-2 text-[#f6f2ec] focus:outline-none focus:border-[#d96b43]"></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[#f3c9d7] mb-1">Relationships & Loyalties</label>
+            <input id="entry-rel-input" type="text" placeholder="e.g. Former apprentice to Corvus; allied with Captain Kaelen" class="w-full text-xs bg-[#20151c] border border-[#4a2b3c] rounded-lg px-3 py-2 text-[#f6f2ec] focus:outline-none focus:border-[#d96b43]">
+          </div>
+        </div>
+
+        <!-- Place Specific Fields -->
+        <div id="modal-place-fields" class="hidden space-y-3 p-3.5 rounded-xl bg-[#1a2b21] border border-[#2e523e]">
+          <div>
+            <label class="block text-xs font-semibold text-[#aae0c3] mb-1">Defining Detail & Environmental Hazards</label>
+            <textarea id="entry-detail-input" rows="2" placeholder="e.g. Mandatory filter mask required below depth 400 or causes crystal-lung" class="w-full text-xs bg-[#142219] border border-[#274433] rounded-lg px-3 py-2 text-[#f6f2ec] focus:outline-none focus:border-[#d96b43]"></textarea>
+          </div>
+        </div>
+
+        <!-- General Description -->
+        <div>
+          <label class="block text-xs font-semibold text-[#c9c1b5] uppercase mb-1">Lore Description</label>
+          <textarea id="entry-desc-input" rows="3" placeholder="Core canon description, physical traits, historical significance, or binding rule constraints..." required class="w-full text-xs bg-[#25201b] border border-[#3e362e] rounded-xl px-3 py-2 text-[#f6f2ec] focus:outline-none focus:border-[#d96b43]"></textarea>
+        </div>
+
+        <!-- Tags -->
+        <div>
+          <label class="block text-xs font-semibold text-[#c9c1b5] uppercase mb-1">Tags (Comma-separated)</label>
+          <input id="entry-tags-input" type="text" placeholder="e.g. Protagonist, Scholar, Lethal Rule, Ivory Spire" class="w-full text-xs bg-[#25201b] border border-[#3e362e] rounded-xl px-3 py-2 text-[#f6f2ec] focus:outline-none focus:border-[#d96b43]">
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center justify-end space-x-3 pt-3 border-t border-[#342e28]">
+          <button type="button" onclick="closeEntryModal()" class="px-4 py-2 rounded-xl text-xs font-medium bg-[#2a241f] hover:bg-[#342d27] text-[#c9c1b5] transition">
+            Cancel
+          </button>
+          <button type="submit" class="px-4 py-2 rounded-xl text-xs font-medium bg-[#d96b43] hover:bg-[#c45a33] text-white transition">
+            Save Canon Entry
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL: SETTINGS & KEYS                                                -->
+  <!-- ===================================================================== -->
+  <div id="settings-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="paper-panel bg-[#1f1b17] border border-[#443a30] max-w-md w-full rounded-2xl p-6 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-3 border-b border-[#342e28]">
+        <h3 class="text-base font-bold text-[#faf8f5]">Project Settings</h3>
+        <button onclick="closeSettingsModal()" class="text-[#8c8275] hover:text-[#f6f2ec] text-2xl leading-none">&times;</button>
+      </div>
+
+      <form id="settings-form" class="mt-4 space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-[#c9c1b5] uppercase mb-1">Google Gemini API Key (Optional)</label>
+          <input id="settings-api-key" type="password" placeholder="Enter GEMINI_API_KEY (optional)" class="w-full text-xs bg-[#25201b] border border-[#3e362e] rounded-xl px-3 py-2.5 text-[#f6f2ec] focus:outline-none focus:border-[#d96b43] font-mono">
+          <p class="text-[11px] text-[#a4998c] mt-1 leading-relaxed">
+            Connects to Gemini for live story question answering and deep continuity scans.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-[#25201b] border border-[#3e362e] text-xs space-y-2">
+          <div class="flex items-center justify-between text-[#c9c1b5]">
+            <span>Story Bible Memory:</span>
+            <span class="text-[#589977] font-medium">Ready (Saved locally)</span>
+          </div>
+          <div class="flex items-center justify-between text-[#c9c1b5]">
+            <span>Voice Studio Engine:</span>
+            <span class="text-[#e5a953] font-medium">Browser Speech Synthesis (Active)</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end space-x-3 pt-3 border-t border-[#342e28]">
+          <button type="button" onclick="closeSettingsModal()" class="px-4 py-2 rounded-xl text-xs font-medium bg-[#2a241f] hover:bg-[#342d27] text-[#c9c1b5] transition">
+            Close
+          </button>
+          <button type="submit" class="px-4 py-2 rounded-xl text-xs font-medium bg-[#d96b43] hover:bg-[#c45a33] text-white transition">
+            Save Key
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Client Application Logic -->
+  <script src="/static/app.js?v=2.8"></script>
+</body>
+</html>

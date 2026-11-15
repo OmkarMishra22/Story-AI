@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+*.key
+lorekeeper/data/elevenlabs_key.txt
+lorekeeper/data/gemini_key.txt
+
+# Generated dynamic audio caches (keep bundled preview_*.mp3)
+lorekeeper/static/audio_cache/voice_*
+/tmp/audio_cache/
+test_jenny.mp3
+
+# Vercel & IDE
+.vercel
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Operating System
+.DS_Store
+Thumbs.db
+desktop.ini
