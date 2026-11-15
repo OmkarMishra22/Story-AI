@@ -4,10 +4,29 @@ Narrative World Engine & Cinematic Voice Studio
 """
 
 import os
+import sys
+
+# Ensure lorekeeper directory is on sys.path FIRST
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+if CURRENT_DIR not in sys.path:
+    sys.path.insert(0, CURRENT_DIR)
+
 from flask import Flask, render_template, request, jsonify, send_from_directory, abort
-from lore_store import LoreStore
-from ai_engine import AIEngine
-from voice_engine import VoiceEngine, VOICE_CATALOG
+
+try:
+    from lore_store import LoreStore
+except ImportError:
+    from lorekeeper.lore_store import LoreStore
+
+try:
+    from ai_engine import AIEngine
+except ImportError:
+    from lorekeeper.ai_engine import AIEngine
+
+try:
+    from voice_engine import VoiceEngine, VOICE_CATALOG
+except ImportError:
+    from lorekeeper.voice_engine import VoiceEngine, VOICE_CATALOG
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 if not os.path.exists(os.path.join(BASE_DIR, "templates")):
