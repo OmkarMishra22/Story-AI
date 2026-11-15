@@ -18,7 +18,10 @@ if os.environ.get("VERCEL") or not os.access(BASE_DIR, os.W_OK):
 else:
     AUDIO_CACHE_DIR = os.path.join(BASE_DIR, "static", "audio_cache")
 
-os.makedirs(AUDIO_CACHE_DIR, exist_ok=True)
+try:
+    os.makedirs(AUDIO_CACHE_DIR, exist_ok=True)
+except Exception:
+    pass
 
 app = Flask(__name__, template_folder=os.path.join(BASE_DIR, "templates"), static_folder=os.path.join(BASE_DIR, "static"))
 lore_store = LoreStore(data_dir=DATA_DIR)

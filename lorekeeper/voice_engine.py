@@ -217,7 +217,10 @@ VOICE_CATALOG = ELEVENLABS_STORYTELLER_VOICES
 class VoiceEngine:
     def __init__(self, cache_dir: str):
         self.cache_dir = cache_dir
-        os.makedirs(self.cache_dir, exist_ok=True)
+        try:
+            os.makedirs(self.cache_dir, exist_ok=True)
+        except Exception:
+            pass
         self.key_file = os.path.join(os.path.dirname(self.cache_dir), "..", "data", "elevenlabs_key.txt")
         self.api_key = self._load_saved_api_key()
 

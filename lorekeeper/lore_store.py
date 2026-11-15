@@ -218,9 +218,15 @@ SEED_CANON: List[Dict[str, Any]] = [
 class LoreStore:
     def __init__(self, data_dir: str):
         self.data_dir = data_dir
-        os.makedirs(data_dir, exist_ok=True)
+        try:
+            os.makedirs(data_dir, exist_ok=True)
+        except Exception:
+            pass
         self.file_path = os.path.join(data_dir, "canon_db.json")
-        self._ensure_initialized()
+        try:
+            self._ensure_initialized()
+        except Exception:
+            pass
 
     def _ensure_initialized(self):
         if not os.path.exists(self.file_path):
