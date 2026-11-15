@@ -1,2 +1,2 @@
 [tool.vercel]
-entrypoint = "lorekeeper.app:app"
+entrypoint = "app:app"

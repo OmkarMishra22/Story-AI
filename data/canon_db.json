@@ -1,0 +1,352 @@
+{
+  "project": {
+    "id": "proj-aethermoor-01",
+    "title": "The Aethermoor Chronicles: The Shattered Citadel",
+    "tagline": "The living memory for your fictional universe \u2014 track established canon, consult world lore, and catch story contradictions before your readers do.",
+    "genre": "Aetherpunk / Literary Fantasy",
+    "summary": "In the submerged city of Oakhaven, scholars and smugglers navigate ancient aether conduits and strict city treaties following the Great Shattering.",
+    "created_at": "Year 440 Post-Shattering"
+  },
+  "entries": [
+    {
+      "id": "char-lyra-vance",
+      "category": "character",
+      "name": "Lyra Vance",
+      "role": "Exiled Aether-Cartographer",
+      "description": "A sharp-witted cartographer expelled from the Ivory Spire for questioning Council secrecy. She wears brass-framed ocular lenses and carries a hand-calibrated resonance compass that hums near energy fissures.",
+      "goal": "Recover the lost Sunstone Core from the Obsidian Trench to reignite Oakhaven's fading perimeter ward before the Eclipse of the Seven Moons.",
+      "relationships": "Estranged former apprentice to Master Corvus (deep mutual distrust); wary ally and partner to smuggler Captain Kaelen.",
+      "tags": [
+        "Protagonist",
+        "Scholar",
+        "Exile",
+        "Aether-Cartography"
+      ]
+    },
+    {
+      "id": "char-master-corvus",
+      "category": "character",
+      "name": "Master Corvus",
+      "role": "High Curator of the Ivory Spire",
+      "description": "An austere elder scholar draped in heavy indigo robes threaded with silver conductive filaments. He commands the Archives and believes mortal minds are fragile vessels that must be shielded from dangerous ancient truths.",
+      "goal": "Preserve the Spire's exclusive monopoly on pre-cataclysm knowledge and prevent anyone from meddling with the Grand Conduit beneath the city.",
+      "relationships": "Lyra Vance's former mentor who orchestrated her council banishment; maintains a discreet underground debt to the Iron Syndicate.",
+      "tags": [
+        "Scholar",
+        "Archivist",
+        "Antagonist",
+        "Ivory Spire"
+      ]
+    },
+    {
+      "id": "char-captain-kaelen",
+      "category": "character",
+      "name": "Captain Kaelen",
+      "role": "Sky-Skiff Smuggler & Deep-Water Pilot",
+      "description": "A pragmatic, cynical sky-skiff pilot who knows every thermal vent and flooded canal in Oakhaven. His custom skiff, 'The Zephyr's Wake', is equipped with illicit acoustic dampeners.",
+      "goal": "Earn enough aether-coin to buy safe passage for his younger sister to the Outer Archipelago and clear his bounties with the harbor guild.",
+      "relationships": "Reluctant partner to Lyra Vance; harbours intense contempt for Ivory Spire scholars; owes gambling debts to the Iron Syndicate.",
+      "tags": [
+        "Pilot",
+        "Smuggler",
+        "Ally",
+        "The Low Docks"
+      ]
+    },
+    {
+      "id": "place-sunken-trench",
+      "category": "place",
+      "name": "The Obsidian Trench",
+      "description": "A fractured abyss three miles beneath the flooded ruins of Old Oakhaven. Lit only by bioluminescent abyssal kelp and sapphire thermal steam vents. Pre-cataclysm glass domes provide fragile atmospheric pockets amidst extreme pressures.",
+      "defining_detail": "The atmosphere below depth 400 is saturated with corrosive vapor crystals. Inhaling unfiltered Trench vapor causes fatal crystal-lung calcification within twenty minutes; sealed breathing gear or resonance helmets are strictly mandatory.",
+      "tags": [
+        "Submerged",
+        "Hazardous",
+        "Ruins",
+        "Abyss"
+      ]
+    },
+    {
+      "id": "place-ivory-spire",
+      "category": "place",
+      "name": "The Ivory Spire",
+      "description": "A thousand-foot crystalline citadel towering above New Oakhaven, carved from light-absorbing pearlite stone that vibrates with a faint harmonic chime every sunrise. It houses the Grand Library, the Astrolabe Observatory, and the High Council Chambers.",
+      "defining_detail": "Entry past the outer colonnade requires a minted Brass Signet. The Grand Library in the upper tier operates under strict neutrality enforced by clockwork Brass Sentinels.",
+      "tags": [
+        "Citadel",
+        "Scholars",
+        "Upper City",
+        "Sanctuary"
+      ]
+    },
+    {
+      "id": "place-low-docks",
+      "category": "place",
+      "name": "The Low Docks",
+      "description": "A sprawling network of barnacle-crusted timber walkways, pontoon shanties, and rusted iron sluice gates resting beneath the city's elevated aqueducts. The air smells of salt brine, fried fish, and burnt mineral oil.",
+      "defining_detail": "The primary haven for black-market aether salvage, untaxed cargo exchanges, and skiff pilots seeking off-the-record repairs.",
+      "tags": [
+        "Harbor",
+        "Underbelly",
+        "Canals",
+        "Waterfront"
+      ]
+    },
+    {
+      "id": "event-great-shattering",
+      "category": "event",
+      "name": "The Great Shattering (Year 412)",
+      "description": "A catastrophic rupture triggered when the city's primary Grand Conduit suffered an energetic resonance cascade during the Twin Solstice. The shockwave cracked the continental shelf, plunging Old Oakhaven into the ocean and permanently dividing the metropolis into the Upper Spire and the flooded Lower Depths.",
+      "tags": [
+        "Cataclysm",
+        "History",
+        "Origin",
+        "Geological"
+      ]
+    },
+    {
+      "id": "event-treaty-seven-bells",
+      "category": "event",
+      "name": "The Treaty of the Seven Bells (Year 425)",
+      "description": "A landmark peace agreement signed by the Scholarly Enclave and the Merchant Fleet Guild following a brutal five-month supply blockade. The treaty guaranteed dock trade autonomy while declaring the Ivory Spire Grand Library inviolate neutral territory.",
+      "tags": [
+        "Treaty",
+        "Law",
+        "Diplomacy",
+        "Grand Library"
+      ]
+    },
+    {
+      "id": "event-banishment-lyra",
+      "category": "event",
+      "name": "The Banishment of Lyra Vance (Year 438)",
+      "description": "A closed-door tribunal convened by the Scholarly Council. Master Corvus brought charges of heresy and unauthorized subterranean cartography after Lyra discovered unrecorded excavation tunnels leading toward the dormant pre-cataclysm reactor.",
+      "tags": [
+        "Tribunal",
+        "Exile",
+        "Secret",
+        "Recent"
+      ]
+    },
+    {
+      "id": "rule-aetheric-resonance",
+      "category": "rule",
+      "name": "The Law of Aetheric Resonance (Rule #1 - Contact Toxicity)",
+      "description": "Raw, unrefined Aether cannot be touched with bare organic flesh. Without an attuned catalyst lens or lead-lined insulated gauntlets, direct contact causes instantaneous cellular calcification, turning skin, muscle, and bone into brittle obsidian-black glass within seconds.",
+      "tags": [
+        "Magic System",
+        "Physical Law",
+        "Lethal",
+        "Aether"
+      ]
+    },
+    {
+      "id": "rule-trench-toxicity",
+      "category": "rule",
+      "name": "Atmospheric Toxicity of the Trench (Rule #2 - Respiratory Hazard)",
+      "description": "Ambient mist in the Obsidian Trench below Depth 400 is heavily saturated with volatile crystal aerosols. Anyone who breathes the unfiltered trench air contracts rapid crystal-lung, causing respiratory failure within twenty minutes. Airtight pressure helmets or charcoal-aether filters are non-negotiable.",
+      "tags": [
+        "Environment",
+        "Survival",
+        "Medical",
+        "Trench"
+      ]
+    },
+    {
+      "id": "rule-sanctuary-seven-bells",
+      "category": "rule",
+      "name": "The Sanctum of the Seven Bells (Rule #3 - Weapon Prohibition)",
+      "description": "Drawing, unsheathing, or brandishing any metallic blade, firearm, or armed projectile inside the Grand Library of the Ivory Spire immediately triggers the dormant clockwork Brass Sentinels embedded in the masonry. Sentinels will pacify the offender with lethal force.",
+      "tags": [
+        "Sanctuary",
+        "Law",
+        "Weapons",
+        "Grand Library"
+      ]
+    },
+    {
+      "id": "rule-sunstone-polarity",
+      "category": "rule",
+      "name": "Sunstone Polarity & Eclipse Recharge (Rule #4 - Energy Limits)",
+      "description": "A Sunstone Core can only be safely recharged when exposed to solar radiation during a celestial planetary alignment. Forcing an energetic recharge or drawing power from a depleted core shatters its crystalline lattice, permanently destroying the core.",
+      "tags": [
+        "Artifacts",
+        "Energy",
+        "Limits",
+        "Celestial"
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "id": "note-seed-01",
+      "title": "Idea: The Ambush at the Rusted Sluice",
+      "character": "Lyra Vance",
+      "category": "Scene Idea",
+      "text": "As Lyra and Kaelen slip under the Low Docks aqueduct, an unregistered dredge-skiff blocks the canal. Lyra must use her resonance compass to spot a flooded drainage pipe before their skiff is boarded.",
+      "why_it_fits": "Tests Lyra's navigation skills and raises the stakes of escaping the Spire watch without violating Trench safety rules.",
+      "created_at": "Today"
+    },
+    {
+      "id": "note-seed-02",
+      "title": "Dialogue snippet: Kaelen's warning about the mist",
+      "character": "Captain Kaelen",
+      "category": "Dialogue Note",
+      "text": "'Don't let the water fool you, scholar. Down here, even the barnacles know when a Spire coat is trying to act like a canal rat.'",
+      "why_it_fits": "Captures Kaelen's dry humor and establishes his distrust of anyone trained in the Ivory Spire.",
+      "created_at": "Yesterday"
+    }
+  ],
+  "audio_scene": {
+    "title": "The Hearth at Whisper Cove",
+    "location": "The Fireside Snug, Old Harbor Tavern",
+    "engine": "elevenlabs",
+    "narrator_voice": {
+      "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+      "label": "George \u2014 Captivating Storyteller",
+      "tone": "Warm, measured, and atmospheric storytelling",
+      "pitch": 1.0,
+      "rate": 1.0
+    },
+    "characters": {
+      "Lyra Vance": {
+        "voice_id": "21m00Tcm4TlvDq8ikWAM",
+        "label": "Rachel \u2014 Calm Narrative Heroine",
+        "tone": "Gentle, thoughtful, and curious",
+        "pitch": 1.0,
+        "rate": 1.0
+      },
+      "Captain Kaelen": {
+        "voice_id": "N2lVS1w4EtoT3dr4eOWO",
+        "label": "Callum \u2014 Husky Rogue Smuggler",
+        "tone": "Warm, friendly rasp with quiet confidence",
+        "pitch": 1.0,
+        "rate": 1.0
+      }
+    },
+    "lines": [
+      {
+        "id": "line-1",
+        "speaker": "Narrator",
+        "delivery": "Warm, measured, and atmospheric storytelling",
+        "text": "A warm golden fire crackled in the stone hearth as rain whispered against the frosted tavern windows."
+      },
+      {
+        "id": "line-2",
+        "speaker": "Lyra Vance",
+        "delivery": "Gentle, thoughtful, and curious",
+        "text": "Did you manage to find the ancient star chart, Kaelen? The archivists said it was lost centuries ago."
+      },
+      {
+        "id": "line-3",
+        "speaker": "Captain Kaelen",
+        "delivery": "Warm, friendly rasp with quiet confidence",
+        "text": "Safe in my coat, scholar. Intact, dry, and glowing just like the old legends promised."
+      },
+      {
+        "id": "line-4",
+        "speaker": "Lyra Vance",
+        "delivery": "Hopeful wonder, a quiet smile",
+        "text": "Then the stories were true. Tomorrow at dawn, our real journey begins."
+      },
+      {
+        "id": "line-5",
+        "speaker": "Captain Kaelen",
+        "delivery": "Gentle grin, raising an earthen mug",
+        "text": "Drink your warm tea and rest, Lyra. The open horizon waits for no one."
+      }
+    ],
+    "playlist": [
+      {
+        "audio_url": "/static/audio_cache/voice_elevenlabs_35ab75d590788619.mp3",
+        "cached": true,
+        "emotion_label": "\ud83c\udfad Dramatic Atmospheric Storyteller",
+        "emotional_mood": "master_storyteller",
+        "engine": "elevenlabs",
+        "filename": "voice_elevenlabs_35ab75d590788619.mp3",
+        "format": "mp3",
+        "is_live_cloud": false,
+        "natural_text": "A warm golden fire crackled in the stone hearth as rain whispered against the frosted tavern windows.",
+        "size_bytes": 38016,
+        "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+        "voice_name": "George \u2014 Captivating Storyteller",
+        "id": "line-1",
+        "speaker": "Narrator",
+        "delivery": "Warm, measured, and atmospheric storytelling",
+        "text": "A warm golden fire crackled in the stone hearth as rain whispered against the frosted tavern windows."
+      },
+      {
+        "audio_url": "/static/audio_cache/voice_elevenlabs_00b7fc6546d23a99.mp3",
+        "cached": false,
+        "emotion_label": "\ud83c\udfad Dramatic Playful Adventurer",
+        "emotional_mood": "bright_curious",
+        "engine": "elevenlabs",
+        "filename": "voice_elevenlabs_00b7fc6546d23a99.mp3",
+        "format": "mp3",
+        "is_live_cloud": false,
+        "natural_text": "Did you manage to find the ancient star chart, Kaelen? The archivists said it was lost centuries ago.",
+        "size_bytes": 40176,
+        "voice_id": "21m00Tcm4TlvDq8ikWAM",
+        "voice_name": "Rachel \u2014 Calm Narrative Heroine",
+        "id": "line-2",
+        "speaker": "Lyra Vance",
+        "delivery": "Gentle, thoughtful, and curious",
+        "text": "Did you manage to find the ancient star chart, Kaelen? The archivists said it was lost centuries ago."
+      },
+      {
+        "audio_url": "/static/audio_cache/voice_elevenlabs_15be27555ba43e3e.mp3",
+        "cached": false,
+        "emotion_label": "\ud83c\udfad Dramatic Sardonic Smuggler",
+        "emotional_mood": "sardonic_rasp",
+        "engine": "elevenlabs",
+        "filename": "voice_elevenlabs_15be27555ba43e3e.mp3",
+        "format": "mp3",
+        "is_live_cloud": false,
+        "natural_text": "Safe in my coat, scholar. Intact, dry, and glowing just like the old legends promised.",
+        "size_bytes": 45216,
+        "voice_id": "N2lVS1w4EtoT3dr4eOWO",
+        "voice_name": "Callum \u2014 Husky Rogue Smuggler",
+        "id": "line-3",
+        "speaker": "Captain Kaelen",
+        "delivery": "Warm, friendly rasp with quiet confidence",
+        "text": "Safe in my coat, scholar. Intact, dry, and glowing just like the old legends promised."
+      },
+      {
+        "audio_url": "/static/audio_cache/voice_elevenlabs_233cd1ac00bed096.mp3",
+        "cached": false,
+        "emotion_label": "\ud83c\udfad Dramatic Atmospheric Storyteller",
+        "emotional_mood": "master_storyteller",
+        "engine": "elevenlabs",
+        "filename": "voice_elevenlabs_233cd1ac00bed096.mp3",
+        "format": "mp3",
+        "is_live_cloud": false,
+        "natural_text": "Then the stories were true. Tomorrow at dawn, our real journey begins.",
+        "size_bytes": 36720,
+        "voice_id": "21m00Tcm4TlvDq8ikWAM",
+        "voice_name": "Rachel \u2014 Calm Narrative Heroine",
+        "id": "line-4",
+        "speaker": "Lyra Vance",
+        "delivery": "Hopeful wonder, a quiet smile",
+        "text": "Then the stories were true. Tomorrow at dawn, our real journey begins."
+      },
+      {
+        "audio_url": "/static/audio_cache/voice_elevenlabs_a201d7ba6951e964.mp3",
+        "cached": false,
+        "emotion_label": "\ud83c\udfad Dramatic Sardonic Smuggler",
+        "emotional_mood": "sardonic_rasp",
+        "engine": "elevenlabs",
+        "filename": "voice_elevenlabs_a201d7ba6951e964.mp3",
+        "format": "mp3",
+        "is_live_cloud": false,
+        "natural_text": "Drink your warm tea and rest, Lyra. The open horizon waits for no one.",
+        "size_bytes": 38448,
+        "voice_id": "N2lVS1w4EtoT3dr4eOWO",
+        "voice_name": "Callum \u2014 Husky Rogue Smuggler",
+        "id": "line-5",
+        "speaker": "Captain Kaelen",
+        "delivery": "Gentle grin, raising an earthen mug",
+        "text": "Drink your warm tea and rest, Lyra. The open horizon waits for no one."
+      }
+    ]
+  }
+}
